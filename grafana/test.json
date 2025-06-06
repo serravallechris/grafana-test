@@ -1,0 +1,27 @@
+// Simple Grafana dashboard example
+{
+  "id": null,
+  "uid": null,
+  "title": "Simple Dashboard",
+  "tags": [],
+  "timezone": "browser",
+  "schemaVersion": 38,
+  "version": 1,
+  "refresh": "5s",
+  "panels": [
+    {
+      "type": "timeseries",
+      "title": "Sample Time Series",
+      "gridPos": { "x": 0, "y": 0, "w": 24, "h": 9 },
+      "id": 1,
+      "datasource": null,
+      "targets": [
+        {
+          "refId": "A",
+          "expr": "up",
+          "format": "time_series"
+        }
+      ]
+    }
+  ]
+}
