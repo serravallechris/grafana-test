@@ -1,572 +1,745 @@
-{ 
- "annotations": {
-    "list": [
-      {
-        "builtIn": 1,
-        "datasource": {
-          "type": "grafana",
-          "uid": "-- Grafana --"
-        },
-        "enable": true,
-        "hide": true,
-        "iconColor": "rgba(0, 211, 255, 1)",
-        "name": "Annotations & Alerts",
-        "target": {
-          "limit": 100,
-          "matchAny": false,
-          "tags": [],
-          "type": "dashboard"
-        },
-        "type": "dashboard"
-      }
-    ]
+{
+  "apiVersion": "dashboard.grafana.app/v2alpha1",
+  "kind": "Dashboard",
+  "metadata": {
+    "name": "DYA-OcCIk"
   },
-  "editable": true,
-  "fiscalYearStartMonth": 0,
-  "graphTooltip": 0,
-  "id": 162,
-  "links": [
-    {
-      "asDropdown": true,
-      "icon": "external link",
-      "includeVars": false,
-      "keepTime": false,
-      "tags": [
-        "apex-webstore"
-      ],
-      "targetBlank": false,
-      "title": "Apex Webstore",
-      "tooltip": "",
-      "type": "dashboards",
-      "url": ""
-    }
-  ],
-  "panels": [
-    {
-      "collapsed": true,
-      "gridPos": {
-        "h": 1,
-        "w": 24,
-        "x": 0,
-        "y": 0
-      },
-      "id": 10,
-      "panels": [
-        {
-          "fieldConfig": {
-            "defaults": {},
-            "overrides": []
-          },
-          "gridPos": {
-            "h": 17,
-            "w": 12,
-            "x": 0,
-            "y": 1
-          },
-          "id": 12,
-          "options": {
-            "content": "    <style>\n        body {\n            font-family: Arial, sans-serif;\n        }\n        .feature-status {\n            margin: 20px;\n        }\n        .feature {\n            display: flex;\n            justify-content: space-between;\n            align-items: center;\n            margin: 10px 0;\n        }\n        .status {\n            display: flex;\n            align-items: center;\n        }\n        .status-icon {\n            margin-left: 10px;\n        }\n        .status-icon.success {\n            color: green;\n        }\n        .status-icon.failure {\n            color: red;\n        }\n\n        .spinner {\n            \n            width: 40px;\n            height: 40px;\n            border: 3px solid rgba(0, 0, 0, 0.1);\n            border-radius: 50%;\n            border-top-color: #3498db;\n            animation: spin 1s ease-in-out infinite;\n        }\n\n        @keyframes spin {\n            to { transform: rotate(360deg); }\n        }\n\n        .spinner-container {\n            margin-top: 50px;\n            display: flex;\n            justify-content: center;\n            align-items: center;\n            height: 100%;\n        }\n    </style>\n\n\n    <div class=\"feature-status-container\">\n        <div class=\"spinner-container\">\n            <div class=\"spinner\"></div>\n        </div>\n    </div>\n\n        <script>\n\n\n        (function() {\n        let featureStatus = [\n            {\n                featureName: \"Browse Apex Coins\", \n                subFeatures: [\n                    { name: \"Browse Coins Logged In\", url: \"https://browser-emulation-service-integration.eax.ea.com/test/webstore-browse?overrideLanguage=en&webstoreOrigin=${e2eOrigin}&sessionId=prod-webstore-browse-logged-in\" },\n                    { name: \"Browse Coins Logged Out\", url: \"https://browser-emulation-service-integration.eax.ea.com/test/webstore-browse?overrideLanguage=en&loggedIn=false&webstoreOrigin=${e2eOrigin}&sessionId=prod-webstore-browse-logged-out\" }\n                ]\n            },\n            {\n                featureName: \"Acquisition\", \n                subFeatures: [\n                    { name: \"Purchase Coins\", url: \"https://browser-emulation-service-integration.eax.ea.com/test/webstore-coin-purchase?overrideLanguage=en&webstoreOrigin=${e2eOrigin}&sessionId=prod-webstore-purchase-coins-logged-in\" },\n                    { name: \"Game Rating Logged In\", url: \"https://browser-emulation-service-integration.eax.ea.com/test/webstore-game-rating?overrideLanguage=en&webstoreOrigin=${e2eOrigin}&sessionId=prod-webstore-game-rating-logged-in&loggedIn=true\" },\n                    { name: \"Game Rating Logged Out\", url: \"https://browser-emulation-service-integration.eax.ea.com/test/webstore-coin-purchase?overrideLanguage=en&webstoreOrigin=${e2eOrigin}&sessionId=prod-webstore-purchase-coins-logged-in&loggedIn=false\" }\n                ]\n            },\n            {\n                featureName: \"User login\", \n                subFeatures: [\n                    { name: \"User Profile\", url: \"https://browser-emulation-service-integration.eax.ea.com/test/webstore-user-profile?overrideLanguage=en&webstoreOrigin=${e2eOrigin}&sessionId=prod-webstore-user-profile\" }\n                ]\n            },\n            {\n                featureName: \"Player Inventory and Coin Balance\", \n                subFeatures: [\n                    { name: \"Coin Balance\", url: \"https://browser-emulation-service-integration.eax.ea.com/test/webstore-user-coin-balance?overrideLanguage=en&webstoreOrigin=${e2eOrigin}&sessionId=prod-webstore-user-coin-balance\" }\n                ]\n            },\n            {\n                featureName: \"Battle Pass\", \n                subFeatures: [\n                    { name: \"BP Premium Purchase\", url: \"https://browser-emulation-service-integration.eax.ea.com/test/webstore-battle-pass-purchase?overrideLanguage=en&webstoreOrigin=${e2eOrigin}&originId=Origin.OFR.50.0005643&sessionId=preview-webstore-battle-pass-purchase\" },\n                    { name: \"BP Premium+ Purchase\", url: \"https://browser-emulation-service-integration.eax.ea.com/test/webstore-battle-pass-purchase?overrideLanguage=en&webstoreOrigin=${e2eOrigin}&originId=Origin.OFR.50.0005645&sessionId=preview-webstore-battle-pass-purchase\" },\n                    { name: \"BP Upgrade\", url: \"https://browser-emulation-service-integration.eax.ea.com/test/webstore-battle-pass-purchase?overrideLanguage=en&webstoreOrigin=${e2eOrigin}&originId=Origin.OFR.50.0005644&inventoryItems=battlepass_season22_01,battlepass_season22_01_purchased&sessionId=preview-webstore-battle-pass-upgrade\" },\n                    { name: \"BP Purchase Protection\", url: \"https://browser-emulation-service-integration.eax.ea.com/test/webstore-battle-pass-purchase?overrideLanguage=en&webstoreOrigin=${e2eOrigin}&originId=Origin.OFR.50.0005643&inventoryItems=battlepass_season22_01,battlepass_season22_01_elite,battlepass_season22_01_purchased,battlepass_season22_01_purchased_xp&expectPurchasable=false&sessionId=preview-webstore-battle-pass-purchase-protection\" }\n                ]\n            }\n        ];\n\n        async function renderFeatureStatus(data) {\n            const allFeatures = [];\n            featureStatus.forEach(feature => {\n                feature.subFeatures.forEach(subFeature => {\n                    allFeatures.push({...subFeature, featureName: feature.featureName})\n                });\n            });\n\n            const responses = await Promise.all(allFeatures.map(feature => fetch(feature.url)));\n            const featureStatusResponses = await Promise.all(responses.map(response => response.json()));\n            const finalFeatureStatus = featureStatusResponses.reduce((acc, status, statusIndex) => {\n                const featureIndex = acc.findIndex((element) => element.featureName === allFeatures[statusIndex].featureName);\n                if (featureIndex !== -1) {\n                    acc[featureIndex].subFeatures.push({name: allFeatures[statusIndex].name, status: status.success ? 'success' : 'failure'})\n                } else {\n                    console.log('status', status)\n                    return [...acc, {featureName: allFeatures[statusIndex].featureName, subFeatures: [{name: allFeatures[statusIndex].name, status: status.success ? 'success' : 'failure'}] }]\n                }\n\n                return acc;\n            }, []);\n            console.log('finalFeatureStatus', finalFeatureStatus);\n            \n            // const responses = await Promise.all(urls.map(url => fetch(url)));\n            // const data = await Promise.all(responses.map(response => response.json()));\n            const containers = document.querySelectorAll('.feature-status-container');\n            containers.forEach(container => {\n            container.innerHTML = '';\n            finalFeatureStatus.forEach(feature => {\n                const featureStatusDiv = document.createElement('div');\n                featureStatusDiv.className = 'feature-status';\n\n                const topLevelFeature = document.createElement('span');\n                topLevelFeature.textContent = feature.featureName;\n                topLevelFeature.style = 'font-size: 1.3em'\n                const topLevelStatusIcon = document.createElement('span');\n                const topLevelStatus = feature.subFeatures.some(subFeature => subFeature.status === 'failure') ? 'failure' : 'success';\n                topLevelStatusIcon.className = `status-icon ${topLevelStatus}`;\n                topLevelStatusIcon.innerHTML = topLevelStatus === 'success' ? '&#10004;' : '&#10008;';\n                \n                featureStatusDiv.appendChild(topLevelFeature);\n                featureStatusDiv.appendChild(topLevelStatusIcon);\n\n                feature.subFeatures.forEach(subFeature => {\n                    const featureDiv = document.createElement('div');\n                    featureDiv.className = 'feature';\n\n                    const featureNameSpan = document.createElement('span');\n                    featureNameSpan.textContent = subFeature.name;\n                    featureDiv.appendChild(featureNameSpan);\n\n                    const statusDiv = document.createElement('div');\n                    statusDiv.className = 'status';\n\n                    const statusTextSpan = document.createElement('span');\n                    statusTextSpan.textContent = subFeature.status === 'success' ? 'Operating Successfully' : 'Non-Functional';\n                    statusDiv.appendChild(statusTextSpan);\n\n                    const statusIconSpan = document.createElement('span');\n                    statusIconSpan.className = `status-icon ${subFeature.status === 'success' ? 'success' : 'failure'}`;\n                    statusIconSpan.innerHTML = subFeature.status === 'success' ? '&#10004;' : '&#10008;';\n                    statusDiv.appendChild(statusIconSpan);\n\n                    featureDiv.appendChild(statusDiv);\n                    featureStatusDiv.appendChild(featureDiv);\n                });\n\n                container.appendChild(featureStatusDiv);\n            });\n            });\n        }\n\n        renderFeatureStatus(featureStatus)\n        })();\n    </script>",
-            "mode": "html"
-          },
-          "pluginVersion": "8.5.13",
-          "title": "Status by Feature",
-          "type": "text"
-        },
-        {
-          "fieldConfig": {
-            "defaults": {},
-            "overrides": []
-          },
-          "gridPos": {
-            "h": 9,
-            "w": 12,
-            "x": 12,
-            "y": 1
-          },
-          "id": 16,
-          "options": {
-            "alertInstanceLabelFilter": "",
-            "alertName": "",
-            "dashboardAlerts": false,
-            "folder": {
-              "id": 1047,
-              "title": "Apex Webstore"
-            },
-            "groupBy": [],
-            "groupMode": "default",
-            "maxItems": 20,
-            "sortOrder": 1,
-            "stateFilter": {
-              "error": true,
-              "firing": true,
-              "inactive": true,
-              "noData": true,
-              "normal": true,
-              "pending": true
-            }
-          },
-          "title": "Alert Status",
-          "type": "alertlist"
-        },
-        {
-          "datasource": {
-            "type": "grafana-newrelic-datasource",
-            "uid": "000000002"
-          },
-          "fieldConfig": {
-            "defaults": {},
-            "overrides": []
-          },
-          "gridPos": {
-            "h": 8,
-            "w": 12,
-            "x": 12,
-            "y": 10
-          },
-          "id": 20,
-          "options": {
-            "dedupStrategy": "none",
-            "enableLogDetails": true,
-            "prettifyLogMessage": false,
-            "showCommonLabels": false,
-            "showLabels": false,
-            "showTime": false,
-            "sortOrder": "Descending",
-            "wrapLogMessage": true
-          },
-          "pluginVersion": "8.5.13",
-          "targets": [
-            {
-              "action": "metricData",
-              "datasource": {
-                "type": "grafana-newrelic-datasource",
-                "uid": "000000002"
-              },
-              "format": "table",
-              "hide": false,
-              "query": "Select *\nFROM PageAction\nwhere errorMessage != '[GraphQL] PersistedQueryNotFound'\nand errorMessage like '%${logSearchText}%'\nand errorMessage is not NULL\nAND appName = 'apex-store/prod' $__timeFilter\nLIMIT MAX",
-              "queryType": "insights",
-              "refId": "B",
-              "source": {
-                "type": "applications"
-              }
-            }
-          ],
-          "title": "Browser Errors for Prod",
-          "transformations": [
-            {
-              "id": "organize",
-              "options": {
-                "excludeByName": {
-                  "appId": true,
-                  "appName": true,
-                  "asn": true,
-                  "asnLatitude": true,
-                  "asnLongitude": true,
-                  "asnOrganization": true,
-                  "browserHeight": true,
-                  "browserWidth": true,
-                  "city": true,
-                  "currentUrl": true,
-                  "deviceType": true,
-                  "entityGuid": true,
-                  "errorName": true,
-                  "name": true,
-                  "regionCode": true,
-                  "session": true,
-                  "timeSinceLoad": true,
-                  "timestamp": false,
-                  "userAgentVersion": true
-                },
-                "indexByName": {
-                  "actionName": 7,
-                  "appId": 8,
-                  "appName": 9,
-                  "asn": 10,
-                  "asnLatitude": 11,
-                  "asnLongitude": 12,
-                  "asnOrganization": 13,
-                  "browserHeight": 14,
-                  "browserWidth": 15,
-                  "city": 16,
-                  "countryCode": 3,
-                  "currentUrl": 17,
-                  "deviceType": 18,
-                  "entityGuid": 19,
-                  "errorMessage": 1,
-                  "errorName": 20,
-                  "errorStack": 0,
-                  "name": 21,
-                  "operationName": 2,
-                  "pageUrl": 4,
-                  "regionCode": 22,
-                  "session": 23,
-                  "timeSinceLoad": 24,
-                  "timestamp": 26,
-                  "userAgentName": 5,
-                  "userAgentOS": 6,
-                  "userAgentVersion": 25
-                },
-                "renameByName": {
-                  "countryCode": "Country",
-                  "pageUrl": "URL",
-                  "userAgentName": "Browser",
-                  "userAgentOS": "OS"
-                }
-              }
-            }
-          ],
-          "type": "logs"
-        }
-      ],
-      "title": "Browser Status",
-      "type": "row"
-    },
-    {
-      "collapsed": true,
-      "gridPos": {
-        "h": 1,
-        "w": 24,
-        "x": 0,
-        "y": 1
-      },
-      "id": 4,
-      "panels": [],
-      "title": "Akamai",
-      "type": "row"
-    },
-    {
-      "collapsed": false,
-      "gridPos": {
-        "h": 1,
-        "w": 24,
-        "x": 0,
-        "y": 2
-      },
-      "id": 14,
-      "panels": [],
-      "title": "Apex Webstore Kubernetes Stats",
-      "type": "row"
-    },
-    {
-      "collapsed": true,
-      "gridPos": {
-        "h": 1,
-        "w": 24,
-        "x": 0,
-        "y": 3
-      },
-      "id": 6,
-      "panels": [],
-      "title": "Redis Server Cache",
-      "type": "row"
-    },
-    {
-      "collapsed": false,
-      "gridPos": {
-        "h": 1,
-        "w": 24,
-        "x": 0,
-        "y": 4
-      },
-      "id": 8,
-      "panels": [],
-      "title": "Service Side Rendered Page Cache",
-      "type": "row"
-    },
-    {
-      "datasource": {
-        "type": "loki",
-        "uid": "FEhZTaXSk"
-      },
-      "fieldConfig": {
-        "defaults": {},
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 22,
-        "w": 10,
-        "x": 0,
-        "y": 5
-      },
-      "id": 18,
-      "options": {
-        "dedupStrategy": "none",
-        "enableInfiniteScrolling": false,
-        "enableLogDetails": true,
-        "prettifyLogMessage": false,
-        "showCommonLabels": false,
-        "showLabels": false,
-        "showTime": false,
-        "sortOrder": "Descending",
-        "wrapLogMessage": false
-      },
-      "pluginVersion": "12.1.0-89256.patch1-89350",
-      "targets": [
-        {
-          "datasource": {
-            "type": "loki",
-            "uid": "FEhZTaXSk"
-          },
-          "expr": "{yardmaster_ea_com_project=\"apex-webstore\", namespace=\"octane-apex-webstore-$env\"} |~ \"(?i)CACHE (GET|SET).*$pagePath.*\" | json | logfmt | line_format \"{{.msg}}\"",
-          "queryType": "range",
-          "refId": "A"
-        }
-      ],
-      "title": "Next.js Full Page Route Redis Cache Keys on $env",
-      "type": "logs"
-    },
-    {
-      "description": "",
-      "fieldConfig": {
-        "defaults": {},
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 6,
-        "w": 14,
-        "x": 10,
-        "y": 5
-      },
-      "id": 22,
-      "options": {
-        "code": {
-          "language": "plaintext",
-          "showLineNumbers": false,
-          "showMiniMap": false
-        },
-        "content": "\n<div style=\"justify-content: center; align-items: center; margin-top: 5px;\">\n  <button \n  onclick=\"(() => {const baseUrl = '${appBaseUrl}';const maxAttempts = 2;let attempts = 0;function fetchData(button) {attempts++;button.disabled = true;console.log(`Attempt ${attempts}`);fetch(`${baseUrl}/apex-legends/api/admin/cache/page-route-value?path=${document.querySelectorAll('.clear-cache-input')[0].value}`, { method: 'DELETE'}).then(response => response.json()).then(data => {if (data.cacheDeleted) {console.log('Success:', data);button.style.cssText = 'background-color: green; line-height: 30px; font-weight: 500; color: white';setTimeout(() => {button.disabled = false;button.style.backgroundColor = 'rgb(61, 113, 217)';}, 10000);} else if (attempts < maxAttempts) {fetchData(button);} else {console.log('Max attempts reached, no success'); button.disabled = false;}}).catch(error => {console.error('Error fetching data:', error); button.disabled = false;button.style.backgroundColor = 'rgb(61, 113, 217)';});}fetchData(this);})()\"\n  style=\"line-height: 30px; font-weight: 500; color: white; background-color: rgb(61, 113, 217)\">\n  Clear Cache for Path</button>\n  <input class=\"clear-cache-input\" value=\"${pagePath}\" type=\"text\" style=\"color: black; padding-left: 5px; background-color: white; min-width: 200px; line-height: 32px\"/>\n</div>\n<div style=\"padding-top: 15px;\">\n  <a style=\"padding-top: 15px; display: block\" href=\"${appBaseUrl}/apex-legends/api/admin/cache/page-route-value?path=${pagePath}\"\n     target=\"_blank\">\n    ${appBaseUrl}/apex-legends/api/admin/cache/page-route-value?path=${pagePath}\n  </a>\n\n  <a style=\"padding-top: 15px; display: block\" href=\"${appBaseUrl}/apex-legends/en\"\n     target=\"_blank\">\n    ${appBaseUrl}/apex-legends/en\n  </a>\n</div>",
-        "mode": "html"
-      },
-      "pluginVersion": "12.1.0-89256.patch1-89350",
-      "title": "Clear Page Cache",
-      "type": "text"
-    },
-    {
-      "datasource": {
-        "type": "marcusolsson-json-datasource",
-        "uid": "${webstoreApiDatastore}"
-      },
-      "fieldConfig": {
-        "defaults": {},
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 18,
-        "w": 14,
-        "x": 10,
-        "y": 11
-      },
-      "id": 28,
-      "options": {
-        "expandLevel": 1,
-        "orderLevels": "asc",
-        "rootName": "Root",
-        "serieColumn": "serieColumn",
-        "showItemCount": true,
-        "treeFieldTemplateEngine": "handlebars",
-        "treeFields": "{{lastModified}} {{lifespan}}{{tags}} + Value\n{{value}}"
-      },
-      "pluginVersion": "12.1.0-89256.patch1-89350",
-      "targets": [
-        {
-          "cacheDurationSeconds": 300,
-          "datasource": {
-            "type": "marcusolsson-json-datasource",
-            "uid": "${webstoreApiDatastore}"
-          },
-          "fields": [
-            {
-              "jsonPath": "$.parsedValue.lastModified",
-              "name": "lastModified",
-              "type": "string"
-            },
-            {
-              "jsonPath": "$.parsedValue.lifespan",
-              "language": "jsonpath",
-              "name": "lifespan"
-            },
-            {
-              "jsonPath": "$.parsedValue.tags",
-              "language": "jsonpath",
-              "name": "tags"
-            },
-            {
-              "jsonPath": "$.parsedValue.value",
-              "language": "jsonpath",
-              "name": "value"
-            }
-          ],
-          "method": "GET",
-          "params": [
-            [
-              "path",
-              "$pagePath"
-            ],
-            [
-              "time",
-              "$__from:date:iso"
-            ]
-          ],
-          "queryParams": "",
-          "refId": "A",
-          "urlPath": "/apex-legends/api/admin/cache/page-route-value"
-        }
-      ],
-      "title": "Cached Value",
-      "type": "pgillich-tree-panel"
-    }
-  ],
-  "preload": false,
-  "refresh": "5s",
-  "schemaVersion": 41,
-  "tags": [
-    "apex-webstore"
-  ],
-  "templating": {
-    "list": [
+  "spec": {
+    "annotations": [
       {
-        "current": {
-          "text": "prod",
-          "value": "prod"
-        },
-        "includeAll": false,
-        "name": "env",
-        "options": [
+        "kind": "AnnotationQuery",
+        "spec": {
+          "builtIn": true,
+          "datasource": {
+            "type": "grafana",
+            "uid": "-- Grafana --"
+          },
+          "enable": true,
+          "hide": true,
+          "iconColor": "rgba(0, 211, 255, 1)",
+          "name": "Annotations \u0026 Alerts",
+          "query": {
+            "kind": "grafana",
+            "spec": {
+              "limit": 100,
+              "matchAny": false,
+              "tags": [],
+              "type": "dashboard"
+            }
+          }
+        }
+      }
+    ],
+    "cursorSync": "Off",
+    "description": "",
+    "editable": true,
+    "elements": {
+      "panel-12": {
+        "kind": "Panel",
+        "spec": {
+          "data": {
+            "kind": "QueryGroup",
+            "spec": {
+              "queries": [],
+              "queryOptions": {},
+              "transformations": []
+            }
+          },
+          "description": "",
+          "id": 12,
+          "links": [],
+          "title": "Status by Feature",
+          "vizConfig": {
+            "kind": "text",
+            "spec": {
+              "fieldConfig": {
+                "defaults": {},
+                "overrides": []
+              },
+              "options": {
+                "content": "    \u003cstyle\u003e\n        body {\n            font-family: Arial, sans-serif;\n        }\n        .feature-status {\n            margin: 20px;\n        }\n        .feature {\n            display: flex;\n            justify-content: space-between;\n            align-items: center;\n            margin: 10px 0;\n        }\n        .status {\n            display: flex;\n            align-items: center;\n        }\n        .status-icon {\n            margin-left: 10px;\n        }\n        .status-icon.success {\n            color: green;\n        }\n        .status-icon.failure {\n            color: red;\n        }\n\n        .spinner {\n            \n            width: 40px;\n            height: 40px;\n            border: 3px solid rgba(0, 0, 0, 0.1);\n            border-radius: 50%;\n            border-top-color: #3498db;\n            animation: spin 1s ease-in-out infinite;\n        }\n\n        @keyframes spin {\n            to { transform: rotate(360deg); }\n        }\n\n        .spinner-container {\n            margin-top: 50px;\n            display: flex;\n            justify-content: center;\n            align-items: center;\n            height: 100%;\n        }\n    \u003c/style\u003e\n\n\n    \u003cdiv class=\"feature-status-container\"\u003e\n        \u003cdiv class=\"spinner-container\"\u003e\n            \u003cdiv class=\"spinner\"\u003e\u003c/div\u003e\n        \u003c/div\u003e\n    \u003c/div\u003e\n\n        \u003cscript\u003e\n\n\n        (function() {\n        let featureStatus = [\n            {\n                featureName: \"Browse Apex Coins\", \n                subFeatures: [\n                    { name: \"Browse Coins Logged In\", url: \"https://browser-emulation-service-integration.eax.ea.com/test/webstore-browse?overrideLanguage=en\u0026webstoreOrigin=${e2eOrigin}\u0026sessionId=prod-webstore-browse-logged-in\" },\n                    { name: \"Browse Coins Logged Out\", url: \"https://browser-emulation-service-integration.eax.ea.com/test/webstore-browse?overrideLanguage=en\u0026loggedIn=false\u0026webstoreOrigin=${e2eOrigin}\u0026sessionId=prod-webstore-browse-logged-out\" }\n                ]\n            },\n            {\n                featureName: \"Acquisition\", \n                subFeatures: [\n                    { name: \"Purchase Coins\", url: \"https://browser-emulation-service-integration.eax.ea.com/test/webstore-coin-purchase?overrideLanguage=en\u0026webstoreOrigin=${e2eOrigin}\u0026sessionId=prod-webstore-purchase-coins-logged-in\" },\n                    { name: \"Game Rating Logged In\", url: \"https://browser-emulation-service-integration.eax.ea.com/test/webstore-game-rating?overrideLanguage=en\u0026webstoreOrigin=${e2eOrigin}\u0026sessionId=prod-webstore-game-rating-logged-in\u0026loggedIn=true\" },\n                    { name: \"Game Rating Logged Out\", url: \"https://browser-emulation-service-integration.eax.ea.com/test/webstore-coin-purchase?overrideLanguage=en\u0026webstoreOrigin=${e2eOrigin}\u0026sessionId=prod-webstore-purchase-coins-logged-in\u0026loggedIn=false\" }\n                ]\n            },\n            {\n                featureName: \"User login\", \n                subFeatures: [\n                    { name: \"User Profile\", url: \"https://browser-emulation-service-integration.eax.ea.com/test/webstore-user-profile?overrideLanguage=en\u0026webstoreOrigin=${e2eOrigin}\u0026sessionId=prod-webstore-user-profile\" }\n                ]\n            },\n            {\n                featureName: \"Player Inventory and Coin Balance\", \n                subFeatures: [\n                    { name: \"Coin Balance\", url: \"https://browser-emulation-service-integration.eax.ea.com/test/webstore-user-coin-balance?overrideLanguage=en\u0026webstoreOrigin=${e2eOrigin}\u0026sessionId=prod-webstore-user-coin-balance\" }\n                ]\n            },\n            {\n                featureName: \"Battle Pass\", \n                subFeatures: [\n                    { name: \"BP Premium Purchase\", url: \"https://browser-emulation-service-integration.eax.ea.com/test/webstore-battle-pass-purchase?overrideLanguage=en\u0026webstoreOrigin=${e2eOrigin}\u0026originId=Origin.OFR.50.0005643\u0026sessionId=preview-webstore-battle-pass-purchase\" },\n                    { name: \"BP Premium+ Purchase\", url: \"https://browser-emulation-service-integration.eax.ea.com/test/webstore-battle-pass-purchase?overrideLanguage=en\u0026webstoreOrigin=${e2eOrigin}\u0026originId=Origin.OFR.50.0005645\u0026sessionId=preview-webstore-battle-pass-purchase\" },\n                    { name: \"BP Upgrade\", url: \"https://browser-emulation-service-integration.eax.ea.com/test/webstore-battle-pass-purchase?overrideLanguage=en\u0026webstoreOrigin=${e2eOrigin}\u0026originId=Origin.OFR.50.0005644\u0026inventoryItems=battlepass_season22_01,battlepass_season22_01_purchased\u0026sessionId=preview-webstore-battle-pass-upgrade\" },\n                    { name: \"BP Purchase Protection\", url: \"https://browser-emulation-service-integration.eax.ea.com/test/webstore-battle-pass-purchase?overrideLanguage=en\u0026webstoreOrigin=${e2eOrigin}\u0026originId=Origin.OFR.50.0005643\u0026inventoryItems=battlepass_season22_01,battlepass_season22_01_elite,battlepass_season22_01_purchased,battlepass_season22_01_purchased_xp\u0026expectPurchasable=false\u0026sessionId=preview-webstore-battle-pass-purchase-protection\" }\n                ]\n            }\n        ];\n\n        async function renderFeatureStatus(data) {\n            const allFeatures = [];\n            featureStatus.forEach(feature =\u003e {\n                feature.subFeatures.forEach(subFeature =\u003e {\n                    allFeatures.push({...subFeature, featureName: feature.featureName})\n                });\n            });\n\n            const responses = await Promise.all(allFeatures.map(feature =\u003e fetch(feature.url)));\n            const featureStatusResponses = await Promise.all(responses.map(response =\u003e response.json()));\n            const finalFeatureStatus = featureStatusResponses.reduce((acc, status, statusIndex) =\u003e {\n                const featureIndex = acc.findIndex((element) =\u003e element.featureName === allFeatures[statusIndex].featureName);\n                if (featureIndex !== -1) {\n                    acc[featureIndex].subFeatures.push({name: allFeatures[statusIndex].name, status: status.success ? 'success' : 'failure'})\n                } else {\n                    console.log('status', status)\n                    return [...acc, {featureName: allFeatures[statusIndex].featureName, subFeatures: [{name: allFeatures[statusIndex].name, status: status.success ? 'success' : 'failure'}] }]\n                }\n\n                return acc;\n            }, []);\n            console.log('finalFeatureStatus', finalFeatureStatus);\n            \n            // const responses = await Promise.all(urls.map(url =\u003e fetch(url)));\n            // const data = await Promise.all(responses.map(response =\u003e response.json()));\n            const containers = document.querySelectorAll('.feature-status-container');\n            containers.forEach(container =\u003e {\n            container.innerHTML = '';\n            finalFeatureStatus.forEach(feature =\u003e {\n                const featureStatusDiv = document.createElement('div');\n                featureStatusDiv.className = 'feature-status';\n\n                const topLevelFeature = document.createElement('span');\n                topLevelFeature.textContent = feature.featureName;\n                topLevelFeature.style = 'font-size: 1.3em'\n                const topLevelStatusIcon = document.createElement('span');\n                const topLevelStatus = feature.subFeatures.some(subFeature =\u003e subFeature.status === 'failure') ? 'failure' : 'success';\n                topLevelStatusIcon.className = `status-icon ${topLevelStatus}`;\n                topLevelStatusIcon.innerHTML = topLevelStatus === 'success' ? '\u0026#10004;' : '\u0026#10008;';\n                \n                featureStatusDiv.appendChild(topLevelFeature);\n                featureStatusDiv.appendChild(topLevelStatusIcon);\n\n                feature.subFeatures.forEach(subFeature =\u003e {\n                    const featureDiv = document.createElement('div');\n                    featureDiv.className = 'feature';\n\n                    const featureNameSpan = document.createElement('span');\n                    featureNameSpan.textContent = subFeature.name;\n                    featureDiv.appendChild(featureNameSpan);\n\n                    const statusDiv = document.createElement('div');\n                    statusDiv.className = 'status';\n\n                    const statusTextSpan = document.createElement('span');\n                    statusTextSpan.textContent = subFeature.status === 'success' ? 'Operating Successfully' : 'Non-Functional';\n                    statusDiv.appendChild(statusTextSpan);\n\n                    const statusIconSpan = document.createElement('span');\n                    statusIconSpan.className = `status-icon ${subFeature.status === 'success' ? 'success' : 'failure'}`;\n                    statusIconSpan.innerHTML = subFeature.status === 'success' ? '\u0026#10004;' : '\u0026#10008;';\n                    statusDiv.appendChild(statusIconSpan);\n\n                    featureDiv.appendChild(statusDiv);\n                    featureStatusDiv.appendChild(featureDiv);\n                });\n\n                container.appendChild(featureStatusDiv);\n            });\n            });\n        }\n\n        renderFeatureStatus(featureStatus)\n        })();\n    \u003c/script\u003e",
+                "mode": "html"
+              },
+              "pluginVersion": "8.5.13"
+            }
+          }
+        }
+      },
+      "panel-16": {
+        "kind": "Panel",
+        "spec": {
+          "data": {
+            "kind": "QueryGroup",
+            "spec": {
+              "queries": [],
+              "queryOptions": {},
+              "transformations": []
+            }
+          },
+          "description": "",
+          "id": 16,
+          "links": [],
+          "title": "Alert Status",
+          "vizConfig": {
+            "kind": "alertlist",
+            "spec": {
+              "fieldConfig": {
+                "defaults": {},
+                "overrides": []
+              },
+              "options": {
+                "alertInstanceLabelFilter": "",
+                "alertName": "",
+                "dashboardAlerts": false,
+                "folder": {
+                  "id": 1047,
+                  "title": "Apex Webstore"
+                },
+                "groupBy": [],
+                "groupMode": "default",
+                "maxItems": 20,
+                "sortOrder": 1,
+                "stateFilter": {
+                  "error": true,
+                  "firing": true,
+                  "inactive": true,
+                  "noData": true,
+                  "normal": true,
+                  "pending": true
+                }
+              },
+              "pluginVersion": ""
+            }
+          }
+        }
+      },
+      "panel-18": {
+        "kind": "Panel",
+        "spec": {
+          "data": {
+            "kind": "QueryGroup",
+            "spec": {
+              "queries": [
+                {
+                  "kind": "PanelQuery",
+                  "spec": {
+                    "datasource": {
+                      "type": "loki",
+                      "uid": "FEhZTaXSk"
+                    },
+                    "hidden": false,
+                    "query": {
+                      "kind": "loki",
+                      "spec": {
+                        "expr": "{yardmaster_ea_com_project=\"apex-webstore\", namespace=\"octane-apex-webstore-$env\"} |~ \"(?i)CACHE (GET|SET).*$pagePath.*\" | json | logfmt | line_format \"{{.msg}}\"",
+                        "queryType": "range"
+                      }
+                    },
+                    "refId": "A"
+                  }
+                }
+              ],
+              "queryOptions": {},
+              "transformations": []
+            }
+          },
+          "description": "",
+          "id": 18,
+          "links": [],
+          "title": "Next.js Full Page Route Redis Cache Keys on $env",
+          "vizConfig": {
+            "kind": "logs",
+            "spec": {
+              "fieldConfig": {
+                "defaults": {},
+                "overrides": []
+              },
+              "options": {
+                "dedupStrategy": "none",
+                "enableInfiniteScrolling": false,
+                "enableLogDetails": true,
+                "prettifyLogMessage": false,
+                "showCommonLabels": false,
+                "showLabels": false,
+                "showTime": false,
+                "sortOrder": "Descending",
+                "wrapLogMessage": false
+              },
+              "pluginVersion": "12.0.1"
+            }
+          }
+        }
+      },
+      "panel-20": {
+        "kind": "Panel",
+        "spec": {
+          "data": {
+            "kind": "QueryGroup",
+            "spec": {
+              "queries": [
+                {
+                  "kind": "PanelQuery",
+                  "spec": {
+                    "datasource": {
+                      "type": "grafana-newrelic-datasource",
+                      "uid": "000000002"
+                    },
+                    "hidden": false,
+                    "query": {
+                      "kind": "grafana-newrelic-datasource",
+                      "spec": {
+                        "action": "metricData",
+                        "format": "table",
+                        "query": "Select *\nFROM PageAction\nwhere errorMessage != '[GraphQL] PersistedQueryNotFound'\nand errorMessage like '%${logSearchText}%'\nand errorMessage is not NULL\nAND appName = 'apex-store/prod' $__timeFilter\nLIMIT MAX",
+                        "queryType": "insights",
+                        "source": {
+                          "type": "applications"
+                        }
+                      }
+                    },
+                    "refId": "B"
+                  }
+                }
+              ],
+              "queryOptions": {},
+              "transformations": [
+                {
+                  "kind": "organize",
+                  "spec": {
+                    "id": "organize",
+                    "options": {
+                      "excludeByName": {
+                        "appId": true,
+                        "appName": true,
+                        "asn": true,
+                        "asnLatitude": true,
+                        "asnLongitude": true,
+                        "asnOrganization": true,
+                        "browserHeight": true,
+                        "browserWidth": true,
+                        "city": true,
+                        "currentUrl": true,
+                        "deviceType": true,
+                        "entityGuid": true,
+                        "errorName": true,
+                        "name": true,
+                        "regionCode": true,
+                        "session": true,
+                        "timeSinceLoad": true,
+                        "timestamp": false,
+                        "userAgentVersion": true
+                      },
+                      "indexByName": {
+                        "actionName": 7,
+                        "appId": 8,
+                        "appName": 9,
+                        "asn": 10,
+                        "asnLatitude": 11,
+                        "asnLongitude": 12,
+                        "asnOrganization": 13,
+                        "browserHeight": 14,
+                        "browserWidth": 15,
+                        "city": 16,
+                        "countryCode": 3,
+                        "currentUrl": 17,
+                        "deviceType": 18,
+                        "entityGuid": 19,
+                        "errorMessage": 1,
+                        "errorName": 20,
+                        "errorStack": 0,
+                        "name": 21,
+                        "operationName": 2,
+                        "pageUrl": 4,
+                        "regionCode": 22,
+                        "session": 23,
+                        "timeSinceLoad": 24,
+                        "timestamp": 26,
+                        "userAgentName": 5,
+                        "userAgentOS": 6,
+                        "userAgentVersion": 25
+                      },
+                      "renameByName": {
+                        "countryCode": "Country",
+                        "pageUrl": "URL",
+                        "userAgentName": "Browser",
+                        "userAgentOS": "OS"
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "description": "",
+          "id": 20,
+          "links": [],
+          "title": "Browser Errors for Prod",
+          "vizConfig": {
+            "kind": "logs",
+            "spec": {
+              "fieldConfig": {
+                "defaults": {},
+                "overrides": []
+              },
+              "options": {
+                "dedupStrategy": "none",
+                "enableLogDetails": true,
+                "prettifyLogMessage": false,
+                "showCommonLabels": false,
+                "showLabels": false,
+                "showTime": false,
+                "sortOrder": "Descending",
+                "wrapLogMessage": true
+              },
+              "pluginVersion": "8.5.13"
+            }
+          }
+        }
+      },
+      "panel-22": {
+        "kind": "Panel",
+        "spec": {
+          "data": {
+            "kind": "QueryGroup",
+            "spec": {
+              "queries": [],
+              "queryOptions": {},
+              "transformations": []
+            }
+          },
+          "description": "",
+          "id": 22,
+          "links": [],
+          "title": "Clear Page Cache",
+          "vizConfig": {
+            "kind": "text",
+            "spec": {
+              "fieldConfig": {
+                "defaults": {},
+                "overrides": []
+              },
+              "options": {
+                "code": {
+                  "language": "plaintext",
+                  "showLineNumbers": false,
+                  "showMiniMap": false
+                },
+                "content": "\n\u003cdiv style=\"justify-content: center; align-items: center; margin-top: 5px;\"\u003e\n  \u003cbutton \n  onclick=\"(() =\u003e {const baseUrl = '${appBaseUrl}';const maxAttempts = 2;let attempts = 0;function fetchData(button) {attempts++;button.disabled = true;console.log(`Attempt ${attempts}`);fetch(`${baseUrl}/apex-legends/api/admin/cache/page-route-value?path=${document.querySelectorAll('.clear-cache-input')[0].value}`, { method: 'DELETE'}).then(response =\u003e response.json()).then(data =\u003e {if (data.cacheDeleted) {console.log('Success:', data);button.style.cssText = 'background-color: green; line-height: 30px; font-weight: 500; color: white';setTimeout(() =\u003e {button.disabled = false;button.style.backgroundColor = 'rgb(61, 113, 217)';}, 10000);} else if (attempts \u003c maxAttempts) {fetchData(button);} else {console.log('Max attempts reached, no success'); button.disabled = false;}}).catch(error =\u003e {console.error('Error fetching data:', error); button.disabled = false;button.style.backgroundColor = 'rgb(61, 113, 217)';});}fetchData(this);})()\"\n  style=\"line-height: 30px; font-weight: 1000; color: white; background-color: rgb(61, 113, 217)\"\u003e\n  Clear Cache for Path\u003c/button\u003e\n  \u003cinput class=\"clear-cache-input\" value=\"${pagePath}\" type=\"text\" style=\"color: black; padding-left: 5px; background-color: white; min-width: 200px; line-height: 32px\"/\u003e\n\u003c/div\u003e\n\u003cdiv style=\"padding-top: 15px;\"\u003e\n  \u003ca style=\"padding-top: 15px; display: block\" href=\"${appBaseUrl}/apex-legends/api/admin/cache/page-route-value?path=${pagePath}\"\n     target=\"_blank\"\u003e\n    ${appBaseUrl}/apex-legends/api/admin/cache/page-route-value?path=${pagePath}\n  \u003c/a\u003e\n\n  \u003ca style=\"padding-top: 15px; display: block\" href=\"${appBaseUrl}/apex-legends/en\"\n     target=\"_blank\"\u003e\n    ${appBaseUrl}/apex-legends/en\n  \u003c/a\u003e\n\u003c/div\u003e",
+                "mode": "html"
+              },
+              "pluginVersion": "12.0.1"
+            }
+          }
+        }
+      },
+      "panel-28": {
+        "kind": "Panel",
+        "spec": {
+          "data": {
+            "kind": "QueryGroup",
+            "spec": {
+              "queries": [
+                {
+                  "kind": "PanelQuery",
+                  "spec": {
+                    "datasource": {
+                      "type": "marcusolsson-json-datasource",
+                      "uid": "${webstoreApiDatastore}"
+                    },
+                    "hidden": false,
+                    "query": {
+                      "kind": "marcusolsson-json-datasource",
+                      "spec": {
+                        "cacheDurationSeconds": 300,
+                        "fields": [
+                          {
+                            "jsonPath": "$.parsedValue.lastModified",
+                            "name": "lastModified",
+                            "type": "string"
+                          },
+                          {
+                            "jsonPath": "$.parsedValue.lifespan",
+                            "language": "jsonpath",
+                            "name": "lifespan"
+                          },
+                          {
+                            "jsonPath": "$.parsedValue.tags",
+                            "language": "jsonpath",
+                            "name": "tags"
+                          },
+                          {
+                            "jsonPath": "$.parsedValue.value",
+                            "language": "jsonpath",
+                            "name": "value"
+                          }
+                        ],
+                        "method": "GET",
+                        "params": [
+                          [
+                            "path",
+                            "$pagePath"
+                          ],
+                          [
+                            "time",
+                            "$__from:date:iso"
+                          ]
+                        ],
+                        "queryParams": "",
+                        "urlPath": "/apex-legends/api/admin/cache/page-route-value"
+                      }
+                    },
+                    "refId": "A"
+                  }
+                }
+              ],
+              "queryOptions": {},
+              "transformations": []
+            }
+          },
+          "description": "",
+          "id": 28,
+          "links": [],
+          "title": "Cached Value",
+          "vizConfig": {
+            "kind": "pgillich-tree-panel",
+            "spec": {
+              "fieldConfig": {
+                "defaults": {},
+                "overrides": []
+              },
+              "options": {
+                "expandLevel": 1,
+                "orderLevels": "asc",
+                "rootName": "Root",
+                "serieColumn": "serieColumn",
+                "showItemCount": true,
+                "treeFieldTemplateEngine": "handlebars",
+                "treeFields": "{{lastModified}} {{lifespan}}{{tags}} + Value\n{{value}}"
+              },
+              "pluginVersion": "12.0.1"
+            }
+          }
+        }
+      }
+    },
+    "layout": {
+      "kind": "GridLayout",
+      "spec": {
+        "items": [
           {
-            "selected": false,
-            "text": "integration",
-            "value": "integration"
+            "kind": "GridLayoutRow",
+            "spec": {
+              "collapsed": true,
+              "elements": [
+                {
+                  "kind": "GridLayoutItem",
+                  "spec": {
+                    "element": {
+                      "kind": "ElementReference",
+                      "name": "panel-12"
+                    },
+                    "height": 17,
+                    "width": 12,
+                    "x": 0,
+                    "y": 0
+                  }
+                },
+                {
+                  "kind": "GridLayoutItem",
+                  "spec": {
+                    "element": {
+                      "kind": "ElementReference",
+                      "name": "panel-16"
+                    },
+                    "height": 9,
+                    "width": 12,
+                    "x": 12,
+                    "y": 0
+                  }
+                },
+                {
+                  "kind": "GridLayoutItem",
+                  "spec": {
+                    "element": {
+                      "kind": "ElementReference",
+                      "name": "panel-20"
+                    },
+                    "height": 8,
+                    "width": 12,
+                    "x": 12,
+                    "y": 9
+                  }
+                }
+              ],
+              "title": "Browser Status",
+              "y": 0
+            }
           },
           {
-            "selected": false,
-            "text": "preview",
-            "value": "preview"
+            "kind": "GridLayoutRow",
+            "spec": {
+              "collapsed": false,
+              "elements": [],
+              "title": "Akamai",
+              "y": 1
+            }
           },
           {
-            "selected": false,
-            "text": "stage",
-            "value": "stage"
+            "kind": "GridLayoutRow",
+            "spec": {
+              "collapsed": false,
+              "elements": [],
+              "title": "Apex Webstore Kubernetes Stats",
+              "y": 2
+            }
           },
           {
-            "selected": true,
+            "kind": "GridLayoutRow",
+            "spec": {
+              "collapsed": true,
+              "elements": [],
+              "title": "Redis Server Cache",
+              "y": 3
+            }
+          },
+          {
+            "kind": "GridLayoutRow",
+            "spec": {
+              "collapsed": false,
+              "elements": [
+                {
+                  "kind": "GridLayoutItem",
+                  "spec": {
+                    "element": {
+                      "kind": "ElementReference",
+                      "name": "panel-18"
+                    },
+                    "height": 22,
+                    "width": 10,
+                    "x": 0,
+                    "y": 0
+                  }
+                },
+                {
+                  "kind": "GridLayoutItem",
+                  "spec": {
+                    "element": {
+                      "kind": "ElementReference",
+                      "name": "panel-22"
+                    },
+                    "height": 6,
+                    "width": 14,
+                    "x": 10,
+                    "y": 0
+                  }
+                },
+                {
+                  "kind": "GridLayoutItem",
+                  "spec": {
+                    "element": {
+                      "kind": "ElementReference",
+                      "name": "panel-28"
+                    },
+                    "height": 18,
+                    "width": 14,
+                    "x": 10,
+                    "y": 6
+                  }
+                }
+              ],
+              "title": "Service Side Rendered Page Cache",
+              "y": 4
+            }
+          }
+        ]
+      }
+    },
+    "links": [
+      {
+        "asDropdown": true,
+        "icon": "external link",
+        "includeVars": false,
+        "keepTime": false,
+        "tags": [
+          "apex-webstore"
+        ],
+        "targetBlank": false,
+        "title": "Apex Webstore",
+        "tooltip": "",
+        "type": "dashboards",
+        "url": ""
+      }
+    ],
+    "liveNow": false,
+    "preload": false,
+    "tags": [],
+    "timeSettings": {
+      "autoRefresh": "5s",
+      "autoRefreshIntervals": [
+        "5s",
+        "10s",
+        "30s",
+        "1m",
+        "5m",
+        "15m",
+        "30m",
+        "1h",
+        "2h",
+        "1d"
+      ],
+      "fiscalYearStartMonth": 0,
+      "from": "now-6h",
+      "hideTimepicker": false,
+      "timezone": "",
+      "to": "now"
+    },
+    "title": "Apex Webstore Cache Dashboard",
+    "variables": [
+      {
+        "kind": "CustomVariable",
+        "spec": {
+          "current": {
             "text": "prod",
             "value": "prod"
-          }
-        ],
-        "query": "integration,preview,stage,prod",
-        "type": "custom"
+          },
+          "hide": "dontHide",
+          "includeAll": false,
+          "multi": false,
+          "name": "env",
+          "options": [
+            {
+              "selected": false,
+              "text": "integration",
+              "value": "integration"
+            },
+            {
+              "selected": false,
+              "text": "preview",
+              "value": "preview"
+            },
+            {
+              "selected": false,
+              "text": "stage",
+              "value": "stage"
+            },
+            {
+              "selected": true,
+              "text": "prod",
+              "value": "prod"
+            }
+          ],
+          "query": "integration,preview,stage,prod",
+          "skipUrlSync": false
+        }
       },
       {
-        "current": {
-          "text": "https://store.ea.com",
-          "value": "https://store.ea.com"
-        },
-        "hide": 2,
-        "includeAll": false,
-        "name": "e2eOrigin",
-        "options": [
-          {
-            "selected": true,
+        "kind": "CustomVariable",
+        "spec": {
+          "current": {
             "text": "https://store.ea.com",
             "value": "https://store.ea.com"
-          }
-        ],
-        "query": "https://store.ea.com",
-        "type": "custom"
+          },
+          "hide": "hideVariable",
+          "includeAll": false,
+          "multi": false,
+          "name": "e2eOrigin",
+          "options": [
+            {
+              "selected": true,
+              "text": "https://store.ea.com",
+              "value": "https://store.ea.com"
+            }
+          ],
+          "query": "https://store.ea.com",
+          "skipUrlSync": false
+        }
       },
       {
-        "current": {
-          "text": "",
-          "value": ""
-        },
-        "hide": 2,
-        "name": "logSearchText",
-        "options": [
-          {
-            "selected": true,
+        "kind": "TextVariable",
+        "spec": {
+          "current": {
             "text": "",
             "value": ""
-          }
-        ],
-        "query": "",
-        "type": "textbox"
+          },
+          "hide": "hideVariable",
+          "name": "logSearchText",
+          "query": "",
+          "skipUrlSync": false
+        }
       },
       {
-        "current": {
-          "text": "/en/us/us",
-          "value": "/en/us/us"
-        },
-        "name": "pagePath",
-        "options": [
-          {
-            "selected": true,
+        "kind": "TextVariable",
+        "spec": {
+          "current": {
             "text": "/en/us/us",
             "value": "/en/us/us"
-          }
-        ],
-        "query": "/en/us/us",
-        "type": "textbox"
+          },
+          "hide": "dontHide",
+          "name": "pagePath",
+          "query": "/en/us/us",
+          "skipUrlSync": false
+        }
       },
       {
-        "current": {
-          "text": "https://apex-webstore-integration.eax.ea.com",
-          "value": "https://apex-webstore-integration.eax.ea.com"
-        },
-        "includeAll": false,
-        "name": "appBaseUrl",
-        "options": [
-          {
-            "selected": true,
+        "kind": "CustomVariable",
+        "spec": {
+          "current": {
             "text": "https://apex-webstore-integration.eax.ea.com",
             "value": "https://apex-webstore-integration.eax.ea.com"
           },
-          {
-            "selected": false,
-            "text": "https://apex-webstore-preview.eax.ea.com",
-            "value": "https://apex-webstore-preview.eax.ea.com"
-          },
-          {
-            "selected": false,
-            "text": "https://apex-webstore-stage.eax.ea.com",
-            "value": "https://apex-webstore-stage.eax.ea.com"
-          },
-          {
-            "selected": false,
-            "text": "https://apex-webstore-prod.eax.ea.com",
-            "value": "https://apex-webstore-prod.eax.ea.com"
-          },
-          {
-            "selected": false,
-            "text": "https://apex-webstore-prod-canary.eax.ea.com",
-            "value": "https://apex-webstore-prod-canary.eax.ea.com"
-          }
-        ],
-        "query": "https://apex-webstore-integration.eax.ea.com,https://apex-webstore-preview.eax.ea.com,https://apex-webstore-stage.eax.ea.com,https://apex-webstore-prod.eax.ea.com,https://apex-webstore-prod-canary.eax.ea.com",
-        "type": "custom"
+          "hide": "dontHide",
+          "includeAll": false,
+          "multi": false,
+          "name": "appBaseUrl",
+          "options": [
+            {
+              "selected": true,
+              "text": "https://apex-webstore-integration.eax.ea.com",
+              "value": "https://apex-webstore-integration.eax.ea.com"
+            },
+            {
+              "selected": false,
+              "text": "https://apex-webstore-preview.eax.ea.com",
+              "value": "https://apex-webstore-preview.eax.ea.com"
+            },
+            {
+              "selected": false,
+              "text": "https://apex-webstore-stage.eax.ea.com",
+              "value": "https://apex-webstore-stage.eax.ea.com"
+            },
+            {
+              "selected": false,
+              "text": "https://apex-webstore-prod.eax.ea.com",
+              "value": "https://apex-webstore-prod.eax.ea.com"
+            },
+            {
+              "selected": false,
+              "text": "https://apex-webstore-prod-canary.eax.ea.com",
+              "value": "https://apex-webstore-prod-canary.eax.ea.com"
+            }
+          ],
+          "query": "https://apex-webstore-integration.eax.ea.com,https://apex-webstore-preview.eax.ea.com,https://apex-webstore-stage.eax.ea.com,https://apex-webstore-prod.eax.ea.com,https://apex-webstore-prod-canary.eax.ea.com",
+          "skipUrlSync": false
+        }
       },
       {
-        "current": {
-          "text": "",
-          "value": ""
-        },
-        "includeAll": false,
-        "name": "webstoreApiDatastore",
-        "options": [],
-        "query": "marcusolsson-json-datasource",
-        "refresh": 1,
-        "regex": "/.*Apex Webstore.*/",
-        "type": "datasource"
+        "kind": "DatasourceVariable",
+        "spec": {
+          "current": {
+            "text": "",
+            "value": ""
+          },
+          "hide": "dontHide",
+          "includeAll": false,
+          "multi": false,
+          "name": "webstoreApiDatastore",
+          "options": [],
+          "pluginId": "marcusolsson-json-datasource",
+          "refresh": "onDashboardLoad",
+          "regex": "/.*Apex Webstore.*/",
+          "skipUrlSync": false
+        }
       }
     ]
-  },
-  "time": {
-    "from": "now-6h",
-    "to": "now"
-  },
-  "timepicker": {},
-  "timezone": "",
-  "title": "Apex Webstore Cache Dashboard",
-  "uid": "DYA-OcCIk",
-  "version": 1
+  }
 }
